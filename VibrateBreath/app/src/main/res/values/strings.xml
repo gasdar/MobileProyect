@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">VibrateBreath</string>
+    <string name="til_password">Password</string>
+    <string name="btn_register">Registrarse</string>
+    <string name="btn_initialize">Iniciar Sesión</string>
+    <string name="switch_reminder">Recordar usuario</string>
+    <string name="btn_we_are">¿Quiénes Somos?</string>
+    <string name="til_email">Email</string>
+    <string name="til_username">Nombre de Usuario</string>
+    <string name="til_repeat_password">Repetir Password</string>
+    <string name="txt_user_type">Tipo de Usuario</string>
+    <string name="rd_ROLE_VETERAN">Veterano</string>
+    <string name="rd_ROLE_DOMINATOR">Dominador</string>
+    <string name="btn_confirm_register">Registrarme</string>
+    <string name="til_search_breath">Buscar Respiración</string>
+    <string name="txt_select_breath">Seleccione un Tipo de Respiración</string>
+    <string name="txt_new_technique">Nueva Técnica de Respiración</string>
+    <string name="til_breath_name">Nombre</string>
+    <string name="til_breath_description">Descripción</string>
+    <string name="til_breath_benefits">Beneficios</string>
+    <string name="txt_breath_type">Tipo de Respiración</string>
+    <string name="btn_create_new_breath">NUEVA RESPIRACIÓN</string>
+    <string name="btn_save_register">Guardar</string>
+    <string name="txt_breath_detail">Detalle Respiración</string>
+    <string name="til_date_of_birth">Fecha de Nacimiento</string>
+    <string name="txt_welcome_username">Bienvenido User</string>
+    <string name="txt_we_are_t1">En VibrateBreath, podrás integrar cualquier técnica de respiración.</string>
+    <string name="txt_we_are_t2">Las técnicas de respiración son prácticas que se utilizan para controlar la forma en que respiramos, con el objetivo de mejorar nuestra salud física, mental y emocional.</string>
+    <string name="btn_we_are_return">VOLVER A INICIO</string>
+
+    <!-- VALORES DE ENTRADA DE MAQUETA -->
+    <string-array name="sp_search_breath_type">
+        <item>Concentración</item>
+        <item>Activa</item>
+        <item>Consciencia</item>
+        <item>Calma</item>
+    </string-array>
+
+    <string-array name="lv_searching_breaths">
+        <item>Respiración Diafragmática</item>
+        <item>Respiración Controlada</item>
+        <item>Respiración Cuadrada</item>
+        <item>Respiración Localizada</item>
+        <item>Respiración 4/7/8</item>
+    </string-array>
+
+</resources>
