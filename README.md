@@ -1,2 +1,5 @@
 # MobileProyect
-Proyecto incremental mobile en Android Studio con Kotlin, proyecto sencillo.
+
+Proyecto incremental mobile práctico y sencillo, elaboración de cada etapa de desarrollo con enfoque MVP (Minimum Viable Product).
+
+Abarcando etapas como diseño y construcción de prototipado; realización de estructura, lógica y medición (con lenguaje Kotlin en IDE Android Studio); aprendizaje rápido con prueba y error.
