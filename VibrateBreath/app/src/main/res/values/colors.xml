@@ -2,4 +2,17 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <!-- COLORES PERSONALIZADOS -->
+    <color name="colorPrimary">#8BA965</color>
+    <color name="colorPrimaryVariant">#728E4F</color>
+    <color name="colorSecondary">#FFCF89</color>
+    <color name="colorSecondaryVariant">#FFC570</color>
+    <color name="colorBackground">#FFFEEF</color>
+    <color name="colorSurface">#1EBBBD</color>
+    <color name="colorError">#CB3A2E</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnSecondary">#212121</color>
+    <color name="colorOnBackground">#FFFFFF</color>
+    <color name="colorOnSurface">#212121</color>
+    <color name="colorOnError">#9D2F26</color>
 </resources>

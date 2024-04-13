@@ -1,14 +1,13 @@
 <resources>
     <string name="app_name">VibrateBreath</string>
-    <string name="til_password">Password</string>
+    <string name="til_password">Clave</string>
     <string name="btn_register">Registrarse</string>
     <string name="btn_initialize">Iniciar Sesión</string>
     <string name="switch_reminder">Recordar usuario</string>
     <string name="btn_we_are">¿Quiénes Somos?</string>
     <string name="til_email">Email</string>
     <string name="til_username">Nombre de Usuario</string>
-    <string name="til_repeat_password">Repetir Password</string>
-    <string name="txt_user_type">Tipo de Usuario</string>
+    <string name="til_repeat_password">Repetir Clave</string>
     <string name="rd_ROLE_VETERAN">Veterano</string>
     <string name="rd_ROLE_DOMINATOR">Dominador</string>
     <string name="btn_confirm_register">Registrarme</string>
@@ -27,6 +26,12 @@
     <string name="txt_we_are_t1">En VibrateBreath, podrás integrar cualquier técnica de respiración.</string>
     <string name="txt_we_are_t2">Las técnicas de respiración son prácticas que se utilizan para controlar la forma en que respiramos, con el objetivo de mejorar nuestra salud física, mental y emocional.</string>
     <string name="btn_we_are_return">VOLVER A INICIO</string>
+
+    <!-- VALORES PARA ERRORES -->
+    <string name="null_field">Este campo es requerido!</string>
+    <string name="invalid_format_email">Formato inválido! ej: nombre@dominio.com</string>
+    <string name="invalid_format_username">Formato inválido! ej: Nombre407</string>
+    <string name="passwords_not_match">Los claves no coinciden!</string>
 
     <!-- VALORES DE ENTRADA DE MAQUETA -->
     <string-array name="sp_search_breath_type">

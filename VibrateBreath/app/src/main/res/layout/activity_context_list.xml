@@ -55,7 +55,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#B4C89A"
         android:textColorHint="#FFFFFF"
         app:hintTextColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
@@ -67,7 +66,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#B4C89A"
             android:fontFamily="@font/rocknroll_one"
             android:hint="@string/til_search_breath"
             android:textColor="#FFFFFF" />
@@ -77,7 +75,7 @@
         android:id="@+id/spinner"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:backgroundTint="#000000"
+        android:backgroundTint="#434343"
         android:entries="@array/sp_search_breath_type"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintHorizontal_bias="0.0"

@@ -8,8 +8,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
+
+    private val validator = Validator();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,22 +29,102 @@ class MainActivity : AppCompatActivity() {
         val btn_register_user = findViewById<Button>(R.id.btn_register_user);
         val btn_we_are = findViewById<Button>(R.id.btn_we_are);
 
+        // btn login
         btn_login.setOnClickListener {
-            // Toast.makeText(this, "Hola a todos!!", Toast.LENGTH_SHORT).show();
-            val intent = Intent(this@MainActivity, ContextListActivity::class.java);
-            startActivity(intent);
+            if(validateFields()==0) {
+                val intent = Intent(this@MainActivity, ContextListActivity::class.java);
+                startActivity(intent);
+            }
         }
 
+        // btn register user
         btn_register_user.setOnClickListener {
             val intent = Intent(this@MainActivity, RegisterUserActivity::class.java);
             startActivity(intent);
         }
 
+        // btn context
         btn_we_are.setOnClickListener {
             val intent = Intent(this@MainActivity, WeAreActivity::class.java);
             startActivity(intent);
         }
 
     }
+
+    fun validateFields() : Int {
+
+        // References
+        val til_email = findViewById<TextInputLayout>(R.id.til_email);
+        val til_pass = findViewById<TextInputLayout>(R.id.til_pass);
+
+        var email = til_email.editText?.text.toString();
+        var pass = til_pass.editText?.text.toString();
+        var totalErrors : Int = 0;
+
+        if (validator.isNull(email)) {
+            til_email.error = getString(R.string.null_field);
+            totalErrors += 1;
+        } else if(!validator.validateEmail(email)) {
+            til_email.error = getString(R.string.invalid_format_email);
+            totalErrors += 1;
+        } else {
+            til_email.error = "";
+        }
+
+        if (validator.isNull(pass)) {
+           til_pass.error = getString(R.string.null_field);
+            totalErrors += 1;
+        } else {
+            til_pass.error = "";
+        }
+
+        return totalErrors;
+    }
+
+
+    // ESTADOS DE CICLOS DE VIDA DE LA ACTIVIDAD
+    override fun onDestroy() {
+        super.onDestroy()
+        println("onDestroy()")
+        // Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        println("onStart()")
+        // Toast.makeText(this, "onStart", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        println("onResume()")
+        // Toast.makeText(this, "onResume", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        println("onRestart()")
+        // Toast.makeText(this, "onRestart", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        println("onPause()")
+        // Toast.makeText(this, "onPause", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        println("onStop()")
+        // Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show()
+    }
+
+    // Examples
+
+    // validateFields()
+    // Toast.makeText(this, "${email} - ${pass}", Toast.LENGTH_SHORT).show();
+    // println("${email} - ${pass}");
+    // println("El email es correcto: " + validator.validateEmail(email));
+    // println("La password es nula: " + validator.isNull(pass));
 
 }

@@ -59,11 +59,10 @@
         app:srcCompat="@drawable/create_breath" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout7"
+        android:id="@+id/til_vrb_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="#B4C89A"
         android:textColorHint="#FFFFFF"
         app:hintTextColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
@@ -73,49 +72,44 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#B4C89A"
             android:fontFamily="@font/rocknroll_one"
             android:hint="@string/til_breath_name"
             android:textColor="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout8"
+        android:id="@+id/til_vrb_desc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#B4C89A"
         android:textColorHint="#FFFFFF"
         app:hintTextColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout7">
+        app:layout_constraintTop_toBottomOf="@+id/til_vrb_name">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#B4C89A"
             android:fontFamily="@font/rocknroll_one"
             android:hint="@string/til_breath_description"
             android:textColor="#FFFFFF" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout9"
+        android:id="@+id/til_vrb_benefits"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#B4C89A"
         android:textColorHint="#FFFFFF"
         app:hintTextColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout8">
+        app:layout_constraintTop_toBottomOf="@+id/til_vrb_desc">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#B4C89A"
             android:fontFamily="@font/rocknroll_one"
             android:hint="@string/til_breath_benefits"
             android:textColor="#FFFFFF" />
@@ -131,7 +125,7 @@
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
+        app:layout_constraintTop_toBottomOf="@+id/til_vrb_benefits" />
 
     <Spinner
         android:id="@+id/spinner2"

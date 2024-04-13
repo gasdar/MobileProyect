@@ -51,7 +51,6 @@
         android:id="@+id/btn_we_are"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
         android:backgroundTint="#FFCF87"
         android:fontFamily="@font/rocknroll_one"
         android:text="@string/btn_we_are"
@@ -72,13 +71,10 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/til_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#B4C89A"
-        android:textColorHint="#323232"
-        app:hintTextColor="#323232"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toBottomOf="@+id/switch1"
@@ -87,10 +83,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#B4C89A"
             android:fontFamily="@font/rocknroll_one"
-            android:hint="@string/til_email"
-            android:textColor="#323232" />
+            android:hint="@string/til_email" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -121,25 +115,21 @@
         app:layout_constraintStart_toStartOf="@+id/guideline5" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_pass"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#B4C89A"
-        android:textColorHint="#323232"
-        app:hintTextColor="#323232"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/til_email"
         app:passwordToggleEnabled="true"
         app:startIconDrawable="@drawable/baseline_lock_24">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#B4C89A"
             android:fontFamily="@font/rocknroll_one"
-            android:hint="@string/til_password"
-            android:textColor="#323232" />
+            android:hint="@string/til_password" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
