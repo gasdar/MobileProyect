@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/til_vrb_benefits" />
 
     <Spinner
-        android:id="@+id/spinner2"
+        android:id="@+id/sp_vrb_cat"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:entries="@array/sp_search_breath_type"
@@ -140,13 +140,13 @@
         android:id="@+id/btn_add_breath"
         android:layout_width="0dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:drawableEnd="@drawable/baseline_save_24"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#FFCF87"
+        android:drawableEnd="@drawable/baseline_save_24"
         android:fontFamily="@font/rocknroll_one"
         android:text="@string/btn_save_register"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/guideline13"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
-        app:layout_constraintStart_toStartOf="@+id/guideline11" />
+        app:layout_constraintStart_toStartOf="@+id/guideline11"
+        app:layout_constraintTop_toBottomOf="@+id/sp_vrb_cat" />
 </androidx.constraintlayout.widget.ConstraintLayout>

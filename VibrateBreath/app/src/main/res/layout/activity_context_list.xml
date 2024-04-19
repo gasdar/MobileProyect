@@ -37,7 +37,7 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_welcome"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -59,7 +59,7 @@
         app:hintTextColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/tv_welcome"
         app:startIconDrawable="@drawable/baseline_search_24"
         app:startIconTint="#FFFFFF">
 
@@ -72,7 +72,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/sp_vcl_cat"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:backgroundTint="#434343"
@@ -96,17 +96,16 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
 
     <ListView
-        android:id="@+id/lv_breath_registers"
+        android:id="@+id/lv_vcl_data"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:background="#B3C799"
         android:entries="@array/lv_searching_breaths"
         app:layout_constraintBottom_toTopOf="@+id/guideline6"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline7"
-        app:layout_constraintTop_toBottomOf="@+id/spinner"
+        app:layout_constraintTop_toBottomOf="@+id/sp_vcl_cat"
         app:layout_constraintVertical_bias="1.0" />
 
     <androidx.constraintlayout.widget.Guideline

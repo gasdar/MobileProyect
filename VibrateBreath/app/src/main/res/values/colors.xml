@@ -5,14 +5,14 @@
     <!-- COLORES PERSONALIZADOS -->
     <color name="colorPrimary">#8BA965</color>
     <color name="colorPrimaryVariant">#728E4F</color>
-    <color name="colorSecondary">#FFCF89</color>
-    <color name="colorSecondaryVariant">#FFC570</color>
-    <color name="colorBackground">#FFFEEF</color>
-    <color name="colorSurface">#1EBBBD</color>
+    <color name="colorSecondary">#1EBBBD</color>
+    <color name="colorSecondaryVariant">#69C1AB</color>
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorSurface">#FFCF89</color>
     <color name="colorError">#CB3A2E</color>
     <color name="colorOnPrimary">#FFFFFF</color>
     <color name="colorOnSecondary">#212121</color>
-    <color name="colorOnBackground">#FFFFFF</color>
+    <color name="colorOnBackground">#1EBBBD</color>
     <color name="colorOnSurface">#212121</color>
     <color name="colorOnError">#9D2F26</color>
 </resources>

@@ -128,7 +128,7 @@
         app:layout_constraintTop_toBottomOf="@+id/til_vab_benefits" />
 
     <Spinner
-        android:id="@+id/spinner3"
+        android:id="@+id/sp_vab_cat"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:entries="@array/sp_search_breath_type"
@@ -145,7 +145,7 @@
         android:clickable="true"
         app:backgroundTint="#99BAFB"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3"
+        app:layout_constraintTop_toBottomOf="@+id/sp_vab_cat"
         app:srcCompat="@drawable/baseline_edit_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -157,7 +157,7 @@
         android:clickable="true"
         app:backgroundTint="#FFADAD"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
-        app:layout_constraintTop_toBottomOf="@+id/spinner3"
+        app:layout_constraintTop_toBottomOf="@+id/sp_vab_cat"
         app:srcCompat="@drawable/baseline_delete_outline_24" />
 
 

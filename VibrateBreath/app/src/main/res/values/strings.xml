@@ -33,12 +33,22 @@
     <string name="invalid_format_username">Formato inválido! ej: Nombre407</string>
     <string name="passwords_not_match">Los claves no coinciden!</string>
 
+    <!-- VALORES PARA BUILDER -->
+    <string name="bdr_elimination_title">Confirmación de Eliminación</string>
+    <string name="bdr_elimination_ms">Esta seguro que desea eliminar el registro?</string>
+    <string name="bdr_delete_confirmation">Registro Eliminado</string>
+    <string name="bdr_edition_title">Confirmación de Edición</string>
+    <string name="bdr_edition_ms">Esta seguro que desea editar el registro?</string>
+    <string name="bdr_edit_confirmation">Registro Editado</string>
+    <string name="bdr_negative_bottom">CANCELAR</string>
+    <string name="bdr_neutral_bottom">AÚN NO</string>
+
+
     <!-- VALORES DE ENTRADA DE MAQUETA -->
     <string-array name="sp_search_breath_type">
         <item>Concentración</item>
         <item>Activa</item>
         <item>Consciencia</item>
-        <item>Calma</item>
     </string-array>
 
     <string-array name="lv_searching_breaths">
@@ -46,7 +56,6 @@
         <item>Respiración Controlada</item>
         <item>Respiración Cuadrada</item>
         <item>Respiración Localizada</item>
-        <item>Respiración 4/7/8</item>
     </string-array>
 
 </resources>

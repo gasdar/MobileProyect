@@ -150,6 +150,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:focusableInTouchMode="true"
         app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="@+id/guideline5"
         app:layout_constraintTop_toBottomOf="@+id/til_vru_email"
@@ -158,6 +159,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusableInTouchMode="false"
             android:fontFamily="@font/rocknroll_one"
             android:hint="@string/til_date_of_birth" />
     </com.google.android.material.textfield.TextInputLayout>

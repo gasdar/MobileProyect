@@ -2,7 +2,9 @@ package com.example.vibratebreath
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -12,6 +14,7 @@ import com.google.android.material.textfield.TextInputLayout
 class RegisterBreathActivity : AppCompatActivity() {
 
     private val validator = Validator();
+    private val breathTypes = Persistence().findBreathTypes();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,16 +26,33 @@ class RegisterBreathActivity : AppCompatActivity() {
             insets
         }
 
-        // Obteneción de WIDGETS de la vista
+        // Cargando el spinner
+        loadingBreathTypes();
+
+        // Obtención de WIDGETS de la vista
         val btn_add_breath = findViewById<Button>(R.id.btn_add_breath);
+
+        // Obtención de nombre de usuario
+        val userEmail = intent.getStringExtra("user_email").toString();
 
         btn_add_breath.setOnClickListener {
             if(validate()==0) {
                 val intent = Intent(this@RegisterBreathActivity, ContextListActivity::class.java);
+                intent.putExtra("user_email", userEmail);
                 startActivity(intent);
             }
         }
 
+    }
+
+    private fun loadingBreathTypes() {
+        //REFERENCE
+        val sp_vrb_cat = findViewById<Spinner>(R.id.sp_vrb_cat);
+
+        // Configurando y agregando adaptador a Spinner para los tipos de respiraciones
+        val arrayAdapterSpinner : ArrayAdapter<*>;
+        arrayAdapterSpinner = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, breathTypes);
+        sp_vrb_cat.adapter = arrayAdapterSpinner;
     }
 
     fun validate() : Int {
@@ -47,21 +67,21 @@ class RegisterBreathActivity : AppCompatActivity() {
         var benefits = til_vrb_benefits.editText?.text.toString();
         var totalErrors : Int = 0;
 
-        if(validator.isNull(name)) {
+        if(validator.isNullOrBlankLikeWhite(name)) {
             til_vrb_name.error = getString(R.string.null_field);
             totalErrors += 1;
         } else {
             til_vrb_name.error = "";
         }
 
-        if(validator.isNull(description)) {
+        if(validator.isNullOrBlankLikeWhite(description)) {
             til_vrb_desc.error = getString(R.string.null_field);
             totalErrors += 1;
         } else {
             til_vrb_desc.error = "";
         }
 
-        if(validator.isNull(benefits)) {
+        if(validator.isNullOrBlankLikeWhite(benefits)) {
             til_vrb_benefits.error = getString(R.string.null_field);
             totalErrors += 1;
         } else {

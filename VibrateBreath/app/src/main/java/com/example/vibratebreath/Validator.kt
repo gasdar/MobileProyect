@@ -5,7 +5,7 @@ import java.util.regex.Pattern
 
 class Validator {
 
-    fun isNull(field : String) : Boolean {
+    fun isNullOrBlankLikeWhite(field : String) : Boolean {
         return field.trim().isEmpty() || field.trim().length == 0 || field.isNullOrBlank();
     }
 

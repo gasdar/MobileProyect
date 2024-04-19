@@ -1,9 +1,11 @@
 package com.example.vibratebreath
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
-import android.widget.Toast
+import android.widget.Switch
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -28,11 +30,22 @@ class MainActivity : AppCompatActivity() {
         val btn_login = findViewById<Button>(R.id.btn_login);
         val btn_register_user = findViewById<Button>(R.id.btn_register_user);
         val btn_we_are = findViewById<Button>(R.id.btn_we_are);
+        val sw_reminder = findViewById<Switch>(R.id.sw_reminder);
+        val til_email = findViewById<TextInputLayout>(R.id.til_email);
+        val til_pass = findViewById<TextInputLayout>(R.id.til_pass);
+
+        // Obtención de SHARED PREFERENCES
+        val preferences = getSharedPreferences("login_data", Context.MODE_PRIVATE);
 
         // btn login
         btn_login.setOnClickListener {
-            if(validateFields()==0) {
+            if(validateFields(preferences)==0) {
+                // Todos los datos se encuentran validados y se verifica si se deben guardar
+                keepCredentials(sw_reminder.isChecked, til_email, til_pass, preferences);
+                val email = til_email.editText?.text.toString();
+
                 val intent = Intent(this@MainActivity, ContextListActivity::class.java);
+                intent.putExtra("user_email", email)
                 startActivity(intent);
             }
         }
@@ -51,7 +64,23 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun validateFields() : Int {
+    private fun keepCredentials(keepCredentials: Boolean, tilEmail: TextInputLayout?, tilPass: TextInputLayout?, preferences: SharedPreferences?) {
+        val editor = preferences?.edit();
+        val email : String = tilEmail?.editText?.text.toString();
+        val pass : String = tilPass?.editText?.text.toString();
+
+        if(keepCredentials) {
+            editor?.putString(email, email);
+            editor?.putString("${email}_password", pass);
+        } else {
+            editor?.putString(email, "");
+            editor?.putString("${email}_password", "");
+        }
+
+        editor?.commit();
+    }
+
+    fun validateFields(preferences: SharedPreferences?) : Int {
 
         // References
         val til_email = findViewById<TextInputLayout>(R.id.til_email);
@@ -61,17 +90,26 @@ class MainActivity : AppCompatActivity() {
         var pass = til_pass.editText?.text.toString();
         var totalErrors : Int = 0;
 
-        if (validator.isNull(email)) {
+        if (validator.isNullOrBlankLikeWhite(email)) {
             til_email.error = getString(R.string.null_field);
             totalErrors += 1;
         } else if(!validator.validateEmail(email)) {
             til_email.error = getString(R.string.invalid_format_email);
             totalErrors += 1;
         } else {
+            // En caso de estar correcto el email y que la contraseña este vacía, se busca la data que recuerda a los usuarios
+            if(validator.isNullOrBlankLikeWhite(pass)) {
+                val loginDataMail : String = preferences?.getString(email, "").toString();
+                if(!validator.isNullOrBlankLikeWhite(loginDataMail)) {
+                    val loginDataPassword = preferences?.getString("${email}_password", "");
+                    til_pass.editText?.setText(loginDataPassword);
+                    pass = til_pass.editText?.text.toString();
+                }
+            }
             til_email.error = "";
         }
 
-        if (validator.isNull(pass)) {
+        if (validator.isNullOrBlankLikeWhite(pass)) {
            til_pass.error = getString(R.string.null_field);
             totalErrors += 1;
         } else {
@@ -83,11 +121,6 @@ class MainActivity : AppCompatActivity() {
 
 
     // ESTADOS DE CICLOS DE VIDA DE LA ACTIVIDAD
-    override fun onDestroy() {
-        super.onDestroy()
-        println("onDestroy()")
-        // Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show()
-    }
 
     override fun onStart() {
         super.onStart()
@@ -117,6 +150,12 @@ class MainActivity : AppCompatActivity() {
         super.onStop()
         println("onStop()")
         // Toast.makeText(this, "onStop", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        println("onDestroy()")
+        // Toast.makeText(this, "onDestroy", Toast.LENGTH_SHORT).show()
     }
 
     // Examples
