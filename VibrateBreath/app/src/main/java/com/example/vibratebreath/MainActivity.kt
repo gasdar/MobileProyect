@@ -37,6 +37,15 @@ class MainActivity : AppCompatActivity() {
         // Obtención de SHARED PREFERENCES
         val preferences = getSharedPreferences("login_data", Context.MODE_PRIVATE);
 
+        // CARGAR DATOS EN CASO DE HABERSE LOGEADO ANTES
+        if(intent.getBooleanExtra("u_validate", false)) {
+            til_email.editText?.setText(intent.getStringExtra("u_email"))
+            til_pass.editText?.setText(intent.getStringExtra("u_pass"))
+        } else {
+            til_email.editText?.setText(intent.getStringExtra("user_email"))
+            til_pass.editText?.setText(intent.getStringExtra("user_pass"))
+        }
+
         // Botón de Login
         btn_login.setOnClickListener {
             if(validateFields(preferences)==0) {
@@ -69,12 +78,21 @@ class MainActivity : AppCompatActivity() {
         val email : String = tilEmail?.editText?.text.toString();
         val pass : String = tilPass?.editText?.text.toString();
 
+        /* MANERA PARA GUARDAR RECORDAR CONTRASEÑA, PERO, QUE NECESITA EL NOMBRE DE USUARIO
         if(keepCredentials) {
             editor?.putString(email, email);
             editor?.putString("${email}_password", pass);
         } else {
             editor?.putString(email, "");
             editor?.putString("${email}_password", "");
+        }
+        */
+        if(keepCredentials) {
+            editor?.putString("user_email", email);
+            editor?.putString("user_pass", pass);
+        } else {
+            editor?.putString("user_email", "");
+            editor?.putString("user_pass", "");
         }
 
         editor?.commit();
@@ -97,6 +115,7 @@ class MainActivity : AppCompatActivity() {
             til_email.error = getString(R.string.invalid_format_email);
             totalErrors += 1;
         } else {
+            /* MANERA PARA GUARDAR RECORDAR CONTRASEÑA, PERO, QUE NECESITA EL NOMBRE DE USUARIO
             // En caso de estar correcto el email y que la contraseña este vacía, se busca la data que recuerda a los usuarios
             if(validator.isNullOrBlankLikeWhite(pass)) {
                 val loginDataMail : String = preferences?.getString(email, "").toString();
@@ -106,6 +125,7 @@ class MainActivity : AppCompatActivity() {
                     pass = til_pass.editText?.text.toString();
                 }
             }
+            */
             til_email.error = "";
         }
 

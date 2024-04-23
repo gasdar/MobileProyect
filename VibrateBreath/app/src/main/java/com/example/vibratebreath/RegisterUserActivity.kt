@@ -27,8 +27,11 @@ class RegisterUserActivity : AppCompatActivity() {
             insets
         }
 
+        //  REFERENCES
         val btn_add_user = findViewById<Button>(R.id.btn_add_user)
         val til_vru_dob = findViewById<TextInputLayout>(R.id.til_vru_dob)
+        val til_vru_email = findViewById<TextInputLayout>(R.id.til_vru_email)
+        val til_vru_pass = findViewById<TextInputLayout>(R.id.til_vru_pass)
 
         // EVENTO DE SELECCIÓN DE FECHA, AL PRESIONAR SOBRE EL TIL DE LA FECHA
         til_vru_dob.editText?.setOnClickListener {
@@ -38,6 +41,9 @@ class RegisterUserActivity : AppCompatActivity() {
         btn_add_user.setOnClickListener {
             if(validate()==0) {
                 val intent = Intent(this@RegisterUserActivity, MainActivity::class.java)
+                intent.putExtra("u_email", til_vru_email.editText?.text.toString())
+                intent.putExtra("u_pass", til_vru_pass.editText?.text.toString())
+                intent.putExtra("u_validate", true)
                 startActivity(intent)
             }
         }

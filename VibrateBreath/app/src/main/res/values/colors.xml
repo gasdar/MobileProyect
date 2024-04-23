@@ -15,4 +15,6 @@
     <color name="colorOnBackground">#1EBBBD</color>
     <color name="colorOnSurface">#212121</color>
     <color name="colorOnError">#9D2F26</color>
+    <color name="colorArchive">#009688</color>
+    <color name="colorDelete">#9D2F26</color>
 </resources>

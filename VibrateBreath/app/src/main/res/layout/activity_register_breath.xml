@@ -49,9 +49,9 @@
         app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
     <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="0dp"
-        android:layout_height="208dp"
+        android:id="@+id/imv_vrb_photo"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
@@ -67,7 +67,7 @@
         app:hintTextColor="#FFFFFF"
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
-        app:layout_constraintTop_toBottomOf="@+id/imageView4">
+        app:layout_constraintTop_toBottomOf="@+id/imv_vrb_photo">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -149,4 +149,15 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline12"
         app:layout_constraintStart_toStartOf="@+id/guideline11"
         app:layout_constraintTop_toBottomOf="@+id/sp_vrb_cat" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_vrb_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toTopOf="@+id/til_vrb_name"
+        app:layout_constraintEnd_toStartOf="@+id/guideline12"
+        app:srcCompat="@drawable/baseline_camera_alt_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

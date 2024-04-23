@@ -57,5 +57,6 @@
         <item>Respiración Cuadrada</item>
         <item>Respiración Localizada</item>
     </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>
