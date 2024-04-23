@@ -51,12 +51,14 @@ class RegisterBreathActivity : AppCompatActivity() {
 
         // Configurando y agregando adaptador a Spinner para los tipos de respiraciones
         val arrayAdapterSpinner : ArrayAdapter<*>;
-        arrayAdapterSpinner = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, breathTypes);
+        arrayAdapterSpinner = ArrayAdapter(this@RegisterBreathActivity, android.R.layout.simple_dropdown_item_1line, breathTypes);
         sp_vrb_cat.adapter = arrayAdapterSpinner;
     }
 
     fun validate() : Int {
 
+        // TODO: Obtener valor de spinner para asignar un tipo de respiración a la respiración
+        // TODO: Posible Spinner intercambiarlo por un Checkbox, para tener más de un tipo de respiración
         // References
         val til_vrb_name = findViewById<TextInputLayout>(R.id.til_vrb_name);
         val til_vrb_desc = findViewById<TextInputLayout>(R.id.til_vrb_desc);

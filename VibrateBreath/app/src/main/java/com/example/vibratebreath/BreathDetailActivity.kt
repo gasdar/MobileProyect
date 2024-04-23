@@ -61,12 +61,13 @@ class BreathDetailActivity : AppCompatActivity() {
 
         // Configurando y agregando adaptador a Spinner para los tipos de respiraciones
         val arrayAdapterSpinner : ArrayAdapter<*>;
-        arrayAdapterSpinner = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, breathTypes);
+        arrayAdapterSpinner = ArrayAdapter(this@BreathDetailActivity, android.R.layout.simple_dropdown_item_1line, breathTypes);
         sp_vab_cat.adapter = arrayAdapterSpinner;
     }
 
     fun validate() : Int {
 
+        // TODO: Obtener valor de spinner para actualizar un tipo de respiración a la respiración
         //References
         val til_vab_name = findViewById<TextInputLayout>(R.id.til_vab_name)
         val til_vab_desc = findViewById<TextInputLayout>(R.id.til_vab_desc)
@@ -103,7 +104,7 @@ class BreathDetailActivity : AppCompatActivity() {
 
     // Si están los datos correctos, se muestra una pantalla de verificación, ya sea, para eliminar o modificar
     private fun adjustRegisters(option : Int) {
-        val builder = AlertDialog.Builder(this);
+        val builder = AlertDialog.Builder(this@BreathDetailActivity);
         var title : String = "";
         var message : String = "";
         var confirmation : String = "";

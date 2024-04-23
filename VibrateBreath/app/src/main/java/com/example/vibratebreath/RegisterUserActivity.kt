@@ -65,19 +65,20 @@ class RegisterUserActivity : AppCompatActivity() {
 
             val currentDate = Calendar.getInstance();
             val age = calculateAge(selectedDate);
+            val monthFixed = month + 1;
 
             if(selectedDate.after(currentDate)) {
-                Toast.makeText(this, "La fecha de nacimiento, no puede ser mayor que la actual", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this@RegisterUserActivity, "La fecha de nacimiento, no puede ser mayor que la actual", Toast.LENGTH_SHORT).show();
             } else if (age < 18) {
-                Toast.makeText(this, "El usuario debe ser mayor de edad (tener al menos 18 años)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this@RegisterUserActivity, "El usuario debe ser mayor de edad (tener al menos 18 años)", Toast.LENGTH_SHORT).show();
             } else {
                 val sDay : String = numberLessThanTen(dayOfMonth);
-                val sMonth : String = numberLessThanTen(month);
+                val sMonth : String = numberLessThanTen(monthFixed);
                 findViewById<TextInputLayout>(R.id.til_vru_dob).editText?.setText("${sDay}/${sMonth}/${year}");
             }
 
         }
-        DatePickerDialog(this, listenerOfDate, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
+        DatePickerDialog(this@RegisterUserActivity, listenerOfDate, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     private fun calculateAge(birthDate: Calendar): Int {
@@ -99,6 +100,7 @@ class RegisterUserActivity : AppCompatActivity() {
 
     private fun validate() : Int {
 
+        // TODO: Obtener valor del rol del usuario, para asignarselo
         //References
         val til_vru_name = findViewById<TextInputLayout>(R.id.til_vru_name)
         val til_vru_email = findViewById<TextInputLayout>(R.id.til_vru_email)

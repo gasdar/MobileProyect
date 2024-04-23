@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         // Obtención de SHARED PREFERENCES
         val preferences = getSharedPreferences("login_data", Context.MODE_PRIVATE);
 
-        // btn login
+        // Botón de Login
         btn_login.setOnClickListener {
             if(validateFields(preferences)==0) {
                 // Todos los datos se encuentran validados y se verifica si se deben guardar

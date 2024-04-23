@@ -35,6 +35,7 @@ class ContextListActivity : AppCompatActivity() {
         val btn_plus_breath = findViewById<Button>(R.id.btn_plus_breath);
         val lv_vcl_data = findViewById<ListView>(R.id.lv_vcl_data);
 
+        // TODO: Al cargar la data del spinner traer todas las respiraciones relacionadas con el tipo de respiración
         loadingData();
 
         btn_plus_breath.setOnClickListener {
@@ -43,6 +44,7 @@ class ContextListActivity : AppCompatActivity() {
             startActivity(intent);
         }
 
+        // TODO: Entregar el valor del tipo de respiración de la respiración seleccionada
         lv_vcl_data.onItemClickListener = object : AdapterView.OnItemClickListener {
             override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 // Identificando elementos de la colección
@@ -70,12 +72,12 @@ class ContextListActivity : AppCompatActivity() {
 
         // Configurando y agregando adaptador a Spinner para los tipos de respiraciones
         val arrayAdapterSpinner : ArrayAdapter<*>;
-        arrayAdapterSpinner = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, breathTypes);
+        arrayAdapterSpinner = ArrayAdapter(this@ContextListActivity, android.R.layout.simple_dropdown_item_1line, breathTypes);
         sp_vcl_cat.adapter = arrayAdapterSpinner;
 
         // Configurando y agregando adaptador a ListView para las respiraciones
         val arrayAdapterListView : ArrayAdapter<*>;
-        arrayAdapterListView = ArrayAdapter(this, android.R.layout.simple_list_item_1, breaths);
+        arrayAdapterListView = ArrayAdapter(this@ContextListActivity, android.R.layout.simple_list_item_1, breaths);
         lv_vcl_data.adapter = arrayAdapterListView;
     }
 
