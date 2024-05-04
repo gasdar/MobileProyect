@@ -10,7 +10,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+import com.example.vibratebreath.room.Db
+import com.example.vibratebreath.room.entities.User
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+        val room = Room.databaseBuilder(this@MainActivity, Db::class.java,"database-ciisa").allowMainThreadQueries().build()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -42,20 +48,30 @@ class MainActivity : AppCompatActivity() {
             til_email.editText?.setText(intent.getStringExtra("u_email"))
             til_pass.editText?.setText(intent.getStringExtra("u_pass"))
         } else {
-            til_email.editText?.setText(intent.getStringExtra("user_email"))
-            til_pass.editText?.setText(intent.getStringExtra("user_pass"))
+            til_email.editText?.setText(preferences.getString("user_email", ""))
+            til_pass.editText?.setText(preferences.getString("user_pass", ""))
         }
 
         // Botón de Login
         btn_login.setOnClickListener {
             if(validateFields(preferences)==0) {
                 // Todos los datos se encuentran validados y se verifica si se deben guardar
-                keepCredentials(sw_reminder.isChecked, til_email, til_pass, preferences);
-                val email = til_email.editText?.text.toString();
+                keepCredentials(sw_reminder.isChecked, til_email, til_pass, preferences)
+                val email = til_email.editText?.text.toString()
+                val pass = til_pass.editText?.text.toString()
 
-                val intent = Intent(this@MainActivity, ContextListActivity::class.java);
-                intent.putExtra("user_email", email)
-                startActivity(intent);
+                lifecycleScope.launch {
+                    val user = room.daoUser().login(email, pass)
+                    println(user != null)
+                    if(user != null) {
+                        val intent = Intent(this@MainActivity, ContextListActivity::class.java)
+                        intent.putExtra("user_email", email)
+                        startActivity(intent)
+                    } else {
+                        til_email.error = "Usuario o contraseña incorrecto!!"
+                        til_pass.error = "Usuario o contraseña incorrecto!!"
+                    }
+                }
             }
         }
 

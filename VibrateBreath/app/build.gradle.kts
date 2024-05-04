@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.googleAndroidLibrariesMapsplatformSecretsGradlePlugin)
+    kotlin("kapt")//APLICAR ESTA DEPENDENCIA
 }
 
 android {
@@ -40,6 +41,17 @@ android {
 }
 
 dependencies {
+
+    //DEPENDENCIAS ROOM BASE DE DATOS LOCAL
+    val room_version = "2.5.2"
+    implementation ("androidx.room:room-runtime:$room_version")
+    annotationProcessor ("androidx.room:room-compiler:$room_version")
+    // To use Kotlin annotation processing tool (kapt)
+    kapt ("androidx.room:room-compiler:$room_version")
+    //CORRUTINAS
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
+    implementation ("androidx.room:room-ktx:$room_version")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

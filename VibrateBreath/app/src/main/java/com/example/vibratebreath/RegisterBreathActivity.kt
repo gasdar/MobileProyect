@@ -20,6 +20,11 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
 import android.Manifest
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+import com.example.vibratebreath.room.Db
+import com.example.vibratebreath.room.entities.Breath
+import kotlinx.coroutines.launch
 
 class RegisterBreathActivity : AppCompatActivity() {
 
@@ -35,6 +40,7 @@ class RegisterBreathActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register_breath)
+        val room = Room.databaseBuilder(this@RegisterBreathActivity, Db::class.java,"database-ciisa").allowMainThreadQueries().build()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -47,15 +53,30 @@ class RegisterBreathActivity : AppCompatActivity() {
         // Obtención de WIDGETS de la vista
         val btn_add_breath = findViewById<Button>(R.id.btn_add_breath);
         val fab_vrb_camera = findViewById<FloatingActionButton>(R.id.fab_vrb_camera);
+        val til_vrb_name = findViewById<TextInputLayout>(R.id.til_vrb_name);
+        val til_vrb_desc = findViewById<TextInputLayout>(R.id.til_vrb_desc);
+        val til_vrb_benefits = findViewById<TextInputLayout>(R.id.til_vrb_benefits);
 
         // Obtención de nombre de usuario
         val userEmail = intent.getStringExtra("user_email").toString();
 
         btn_add_breath.setOnClickListener {
             if(validate()==0) {
-                val intent = Intent(this@RegisterBreathActivity, ContextListActivity::class.java);
-                intent.putExtra("user_email", userEmail);
-                startActivity(intent);
+                val name = til_vrb_name.editText?.text.toString()
+                val desc = til_vrb_desc.editText?.text.toString()
+                val benefits = til_vrb_benefits.editText?.text.toString()
+                val breath : Breath = Breath(name, desc, benefits, "", userEmail)
+                lifecycleScope.launch {
+                    val id = room.daoBreath().save(breath)
+                    if(id > 0) {
+                        Toast.makeText(this@RegisterBreathActivity, "Respiración registrada!!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@RegisterBreathActivity, ContextListActivity::class.java);
+                        intent.putExtra("user_email", userEmail);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(this@RegisterBreathActivity, "Error al registrar respiración!!", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 
