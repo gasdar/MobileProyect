@@ -3,11 +3,8 @@ package com.example.vibratebreath
 import android.content.Intent
 import android.graphics.Canvas
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
@@ -16,10 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
+import com.example.vibratebreath.room.Db
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
+import kotlinx.coroutines.launch
 
 class ContextListActivity : AppCompatActivity() {
 
@@ -32,6 +33,7 @@ class ContextListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_context_list)
+        val room = Room.databaseBuilder(this@ContextListActivity, Db::class.java,"database-ciisa").allowMainThreadQueries().build()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -42,7 +44,7 @@ class ContextListActivity : AppCompatActivity() {
         val btn_plus_breath = findViewById<Button>(R.id.btn_plus_breath)
 
         // TODO: Al cargar la data del spinner traer todas las respiraciones relacionadas con el tipo de respiración
-        loadingData();
+        loadingData(room)
 
         btn_plus_breath.setOnClickListener {
             val intent = Intent(this@ContextListActivity, RegisterBreathActivity::class.java);
@@ -67,7 +69,7 @@ class ContextListActivity : AppCompatActivity() {
 
     }
 
-    private fun loadingData() {
+    private fun loadingData(room: Db) {
 
         // REFERENCES
         val tv_welcome = findViewById<TextView>(R.id.tv_welcome);
@@ -85,6 +87,7 @@ class ContextListActivity : AppCompatActivity() {
 
         // INFLANCIÓN DE DATOS DEL RECYCLER VIEW
         rv_vcl_data.layoutManager = LinearLayoutManager(this@ContextListActivity)
+        /*
         val items = mutableListOf(
             Item("Respiración Diafragmática", "Respiración que se ve involucrado los musculos abdominales", R.drawable.meditacion1),
             Item("Respiración Controlada", "Respiración enfocada en la acción misma y de ser consciente", R.drawable.meditacion2),
@@ -97,8 +100,23 @@ class ContextListActivity : AppCompatActivity() {
             Item("Respiración Localizada", "Respiración enfocada en alguna parte del cuerpo para sanar", R.drawable.meditacion4),
             Item("Respiración 4/7/8", "Respiración que se inhala 4 seg, se aguanta 7 seg y se exhala 8 seg", R.drawable.meditacion5)
         )
-        val adapterRV = CustomAdapter(items) { item ->
-            Toast.makeText(this@ContextListActivity, "Nombre: ${item.title}", Toast.LENGTH_SHORT).show()
+        */
+        val breathItems = ArrayList<Item>()
+        lifecycleScope.launch {
+            val listBreath = room.daoBreath().findAllByUser(userEmail)
+            listBreath.forEach {
+                val item = Item(it.name.toString(), it.benefits.toString(), R.drawable.meditacion1, it.description.toString(), it.id)
+                breathItems.add(item)
+            }
+        }
+        val adapterRV = CustomAdapter(breathItems) { item ->
+            val intent = Intent(this@ContextListActivity, BreathDetailActivity::class.java)
+            intent.putExtra("user_email", userEmail)
+            intent.putExtra("id", item.id)
+            intent.putExtra("name", item.title)
+            intent.putExtra("benefits", item.benefits)
+            intent.putExtra("description", item.description)
+            startActivity(intent)
         }
         rv_vcl_data.adapter = adapterRV
 

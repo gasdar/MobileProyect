@@ -4,13 +4,19 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+import com.example.vibratebreath.room.Db
+import com.example.vibratebreath.room.entities.User
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.launch
 import java.util.Calendar
 
 class RegisterUserActivity : AppCompatActivity() {
@@ -21,6 +27,7 @@ class RegisterUserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_register_user)
+        val room = Room.databaseBuilder(this@RegisterUserActivity, Db::class.java,"database-ciisa").allowMainThreadQueries().build()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -29,8 +36,9 @@ class RegisterUserActivity : AppCompatActivity() {
 
         //  REFERENCES
         val btn_add_user = findViewById<Button>(R.id.btn_add_user)
-        val til_vru_dob = findViewById<TextInputLayout>(R.id.til_vru_dob)
+        val til_vru_name = findViewById<TextInputLayout>(R.id.til_vru_name)
         val til_vru_email = findViewById<TextInputLayout>(R.id.til_vru_email)
+        val til_vru_dob = findViewById<TextInputLayout>(R.id.til_vru_dob)
         val til_vru_pass = findViewById<TextInputLayout>(R.id.til_vru_pass)
 
         // EVENTO DE SELECCIÓN DE FECHA, AL PRESIONAR SOBRE EL TIL DE LA FECHA
@@ -40,11 +48,26 @@ class RegisterUserActivity : AppCompatActivity() {
 
         btn_add_user.setOnClickListener {
             if(validate()==0) {
-                val intent = Intent(this@RegisterUserActivity, MainActivity::class.java)
-                intent.putExtra("u_email", til_vru_email.editText?.text.toString())
-                intent.putExtra("u_pass", til_vru_pass.editText?.text.toString())
-                intent.putExtra("u_validate", true)
-                startActivity(intent)
+                val name = til_vru_name.editText?.text.toString()
+                val email = til_vru_email.editText?.text.toString()
+                val dateOfBirth = til_vru_dob.editText?.text.toString()
+                val pass = til_vru_pass.editText?.text.toString()
+                val user : User = User(name, email, dateOfBirth, pass)
+
+                lifecycleScope.launch {
+                    val id = room.daoUser().save(user)
+                    if(id > 0) {
+                        Log.d("IDUser", id.toString())
+                        Toast.makeText(this@RegisterUserActivity, "Usuario registrado correctamente!!", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@RegisterUserActivity, MainActivity::class.java)
+                        intent.putExtra("u_email", email)
+                        intent.putExtra("u_pass", pass)
+                        intent.putExtra("u_validate", true)
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this@RegisterUserActivity, "Error al registrar usuario!!", Toast.LENGTH_SHORT).show()
+                    }
+                }
             }
         }
 
